@@ -29,7 +29,8 @@ body { padding: max(18px, env(safe-area-inset-top)) 14px max(22px, env(safe-area
 .card { background:var(--card); border-radius:26px; box-shadow:var(--shadow); padding:clamp(18px,4vw,32px); border:1px solid rgba(148,163,184,.25); }
 .header { display:flex; align-items:center; justify-content:space-between; gap:14px; margin-bottom:18px; }
 .brand { display:flex; align-items:center; gap:12px; min-width:0; }
-.logo { width:46px; height:46px; border-radius:16px; background:linear-gradient(145deg,#2f7dff,#123a91); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:900; box-shadow:inset 0 2px 8px rgba(255,255,255,.3), 0 10px 22px rgba(23,66,181,.25); }
+.logo { width:92px; height:46px; border-radius:16px; background:#fff; display:flex; align-items:center; justify-content:center; box-shadow:inset 0 2px 8px rgba(255,255,255,.3), 0 10px 22px rgba(23,66,181,.14); border:1px solid rgba(23,66,181,.12); overflow:hidden; }
+.wordmarkLogo img { width:82px; height:auto; display:block; }
 h1,h2,h3,p { margin-top:0; }
 h1 { font-size:clamp(1.45rem,4vw,2.15rem); margin-bottom:6px; }
 .subtitle { color:var(--muted); margin:0; line-height:1.4; }
@@ -42,37 +43,29 @@ h1 { font-size:clamp(1.45rem,4vw,2.15rem); margin-bottom:6px; }
 .menuBtn:hover, .controlBtn:hover { transform:translateY(-1px); box-shadow:0 14px 28px rgba(15,23,42,.12); }
 .menuBtn strong { display:block; color:var(--blue); font-size:1.2rem; margin-bottom:6px; }
 .menuBtn span { color:var(--muted); }
+.resumeInfo { display:block; margin-top:8px; color:var(--good) !important; font-weight:750; font-size:.92rem; }
+.menuBtn.hasProgress { border-color:rgba(15,138,67,.28); background:linear-gradient(180deg,#fff,#f0fdf4); }
+.testTile { cursor:default; }
+.tileActions { display:flex; gap:10px; margin-top:14px; flex-wrap:wrap; }
+.tileBtn {
+  border:1px solid rgba(23,66,181,.22);
+  border-radius:999px;
+  padding:10px 14px;
+  font-weight:800;
+  cursor:pointer;
+  background:#fff;
+  color:var(--blue);
+}
+.tileBtn:hover { transform:translateY(-1px); box-shadow:0 8px 16px rgba(15,23,42,.10); }
+.continueBtn { background:linear-gradient(180deg,#eef5ff,#dcecff); }
+.continueBtn[disabled] { opacity:.45; cursor:not-allowed; transform:none; box-shadow:none; }
+.restartBtn { background:linear-gradient(180deg,#fff,#f8fafc); color:var(--text); }
 .smallBtn { border:1px solid rgba(23,66,181,.18); background:#fff; color:var(--blue); border-radius:999px; padding:10px 14px; font-weight:700; cursor:pointer; }
 .smallBtn:disabled { opacity:.5; cursor:not-allowed; }
 .quizTop { display:flex; justify-content:space-between; align-items:flex-start; gap:12px; margin-bottom:14px; }
-.progressWrap {
-  height:22px;
-  border-radius:999px;
-  overflow:hidden;
-  background:linear-gradient(180deg,#c8d2e2 0%,#eef3fa 45%,#ffffff 100%);
-  box-shadow:
-    inset 0 3px 6px rgba(15,23,42,.22),
-    inset 0 -2px 4px rgba(255,255,255,.85),
-    0 4px 10px rgba(15,23,42,.08);
-  border:1px solid rgba(80,100,130,.22);
-  margin:16px 0 22px;
-}
-.progressBar {
-  height:100%;
-  width:0%;
-  border-radius:999px;
-  background:
-    linear-gradient(180deg,
-      #a9d8ff 0%,
-      #55aaff 20%,
-      #1674e8 52%,
-      #0b4db6 100%);
-  box-shadow:
-    inset 0 3px 5px rgba(255,255,255,.65),
-    inset 0 -4px 7px rgba(0,0,0,.26),
-    2px 0 7px rgba(23,66,181,.25);
-  transition:width .35s ease;
-}
+.progressWrap { width:100%; height:22px; background:linear-gradient(180deg,#cfd9ea 0%,#edf4ff 45%,#d9e5f5 100%); border-radius:999px; overflow:hidden; margin: 16px 0 20px; border:1px solid #b9c8df; box-shadow: inset 0 2px 5px rgba(15,23,42,.18), 0 2px 8px rgba(15,23,42,.08); position:relative; }
+.progressBar { height:100%; width:0%; background:linear-gradient(180deg,#62a8ff 0%,#1f73ff 48%,#0f4ed8 100%); transition:width .28s ease; box-shadow: inset 0 1px 2px rgba(255,255,255,.7), inset 0 -2px 4px rgba(0,38,120,.35), 2px 0 6px rgba(31,94,255,.35); border-radius:999px; position:relative; }
+.progressBar::after { content:""; position:absolute; left:8px; right:8px; top:3px; height:7px; border-radius:999px; background:linear-gradient(180deg,rgba(255,255,255,.75),rgba(255,255,255,.15)); }
 .questionText {
   font-size:clamp(1.12rem,3.2vw,1.48rem);
   line-height:1.42;
@@ -115,7 +108,7 @@ h1 { font-size:clamp(1.45rem,4vw,2.15rem); margin-bottom:6px; }
   <section id="menu" class="card">
     <div class="header">
       <div class="brand">
-        <div class="logo">787</div>
+        <div class="logo wordmarkLogo"><img src="wordmark-787.png" alt="787"></div>
         <div>
           <h1>B787 Type Rating Quiz</h1>
           <p class="subtitle">Vier Tests, offline nutzbar, mit 75%-Auswertung nur für korrekte Erstversuche.</p>
@@ -123,10 +116,38 @@ h1 { font-size:clamp(1.45rem,4vw,2.15rem); margin-bottom:6px; }
       </div>
     </div>
     <div class="menuGrid">
-      <button class="menuBtn" onclick="startTest(1,false)"><strong>Test 1</strong><span>Original-Reihenfolge starten</span></button>
-      <button class="menuBtn" onclick="startTest(2,false)"><strong>Test 2</strong><span>Original-Reihenfolge starten</span></button>
-      <button class="menuBtn" onclick="startTest(3,false)"><strong>Test 3</strong><span>Original-Reihenfolge starten</span></button>
-      <button class="menuBtn" onclick="startTest(4,false)"><strong>Test 4</strong><span>Original-Reihenfolge starten</span></button>
+      <div id="menuTest1" class="menuBtn testTile">
+        <strong>Test 1</strong>
+        <span id="menuTest1Text">Original-Reihenfolge starten</span>
+        <div class="tileActions">
+          <button class="tileBtn continueBtn" id="continueTest1" onclick="continueTest(1)">Fortsetzen</button>
+          <button class="tileBtn restartBtn" onclick="restartFromMenu(1)">Neu starten</button>
+        </div>
+      </div>
+      <div id="menuTest2" class="menuBtn testTile">
+        <strong>Test 2</strong>
+        <span id="menuTest2Text">Original-Reihenfolge starten</span>
+        <div class="tileActions">
+          <button class="tileBtn continueBtn" id="continueTest2" onclick="continueTest(2)">Fortsetzen</button>
+          <button class="tileBtn restartBtn" onclick="restartFromMenu(2)">Neu starten</button>
+        </div>
+      </div>
+      <div id="menuTest3" class="menuBtn testTile">
+        <strong>Test 3</strong>
+        <span id="menuTest3Text">Original-Reihenfolge starten</span>
+        <div class="tileActions">
+          <button class="tileBtn continueBtn" id="continueTest3" onclick="continueTest(3)">Fortsetzen</button>
+          <button class="tileBtn restartBtn" onclick="restartFromMenu(3)">Neu starten</button>
+        </div>
+      </div>
+      <div id="menuTest4" class="menuBtn testTile">
+        <strong>Test 4</strong>
+        <span id="menuTest4Text">Original-Reihenfolge starten</span>
+        <div class="tileActions">
+          <button class="tileBtn continueBtn" id="continueTest4" onclick="continueTest(4)">Fortsetzen</button>
+          <button class="tileBtn restartBtn" onclick="restartFromMenu(4)">Neu starten</button>
+        </div>
+      </div>
     </div>
     <div class="installHint">
       <strong>Installation:</strong> Im Handy-Browser öffnen und dann „Zum Home-Bildschirm hinzufügen“ bzw. „App installieren“ wählen.
@@ -174,6 +195,95 @@ let wrongClicks = 0;
 let currentHadWrongAnswer = false;
 let locked = false;
 
+const SAVE_PREFIX = 'b787QuizProgress_v1_test_';
+
+function saveKey(testNumber) {
+  return SAVE_PREFIX + testNumber;
+}
+
+function persistProgress() {
+  if (!currentTest || !questions.length || current >= questions.length) return;
+  const payload = {
+    currentTest,
+    questions,
+    current,
+    correctQuestions,
+    answeredQuestions,
+    wrongClicks,
+    currentHadWrongAnswer,
+    savedAt: Date.now()
+  };
+  localStorage.setItem(saveKey(currentTest), JSON.stringify(payload));
+  updateMenuProgress();
+}
+
+function loadProgress(testNumber) {
+  try {
+    const raw = localStorage.getItem(saveKey(testNumber));
+    return raw ? JSON.parse(raw) : null;
+  } catch (e) {
+    return null;
+  }
+}
+
+function clearProgress(testNumber) {
+  localStorage.removeItem(saveKey(testNumber));
+  updateMenuProgress();
+}
+
+function hasUsableProgress(state) {
+  return state && Array.isArray(state.questions) && state.questions.length === 100 && state.current > 0 && state.current < state.questions.length;
+}
+
+function continueTest(testNumber) {
+  const state = loadProgress(testNumber);
+  if (!hasUsableProgress(state)) return startTest(testNumber, false);
+  currentTest = state.currentTest;
+  questions = state.questions;
+  current = state.current;
+  correctQuestions = state.correctQuestions;
+  answeredQuestions = state.answeredQuestions;
+  wrongClicks = state.wrongClicks || 0;
+  currentHadWrongAnswer = !!state.currentHadWrongAnswer;
+  locked = false;
+  showOnly('quiz');
+  render();
+  persistProgress();
+}
+
+function restartFromMenu(testNumber) {
+  const state = loadProgress(testNumber);
+  if (hasUsableProgress(state)) {
+    const ok = confirm(`Test ${testNumber} wirklich von vorne starten? Der gespeicherte Fortschritt wird gelöscht.`);
+    if (!ok) return;
+  }
+  clearProgress(testNumber);
+  startTest(testNumber, false);
+}
+
+function handleMenuTest(testNumber) {
+  restartFromMenu(testNumber);
+}
+
+function updateMenuProgress() {
+  for (let i = 1; i <= 4; i++) {
+    const state = loadProgress(i);
+    const btn = el('menuTest' + i);
+    const text = el('menuTest' + i + 'Text');
+    const cont = el('continueTest' + i);
+    if (!btn || !text || !cont) continue;
+    if (hasUsableProgress(state)) {
+      btn.classList.add('hasProgress');
+      text.innerHTML = `Gespeichert: Frage ${state.current + 1} von ${state.questions.length}<span class="resumeInfo">Du kannst fortsetzen oder neu starten.</span>`;
+      cont.disabled = false;
+    } else {
+      btn.classList.remove('hasProgress');
+      text.textContent = 'Noch kein gespeicherter Fortschritt.';
+      cont.disabled = true;
+    }
+  }
+}
+
 function el(id) { return document.getElementById(id); }
 
 function escapeHTML(value) {
@@ -215,6 +325,7 @@ function showOnly(id) {
 
 function showMenu() {
   currentTest = null;
+  updateMenuProgress();
   showOnly('menu');
 }
 
@@ -295,7 +406,7 @@ function choose(choice, button) {
     el('feedback').textContent = '✅ Richtig!';
     el('feedback').className = 'feedback good';
     [...document.querySelectorAll('.answer')].forEach(b => b.disabled = true);
-    setTimeout(() => { current++; render(); }, 1200);
+    setTimeout(() => { current++; render(); persistProgress(); }, 1200);
   } else {
     wrongClicks++;
     currentHadWrongAnswer = true;
@@ -304,6 +415,7 @@ function choose(choice, button) {
     updateStats();
     el('feedback').textContent = '❌ Falsch! Bitte erneut versuchen.';
     el('feedback').className = 'feedback bad';
+    persistProgress();
   }
 }
 
@@ -330,6 +442,7 @@ function resultMessage(percent) {
 }
 
 function finish() {
+  clearProgress(currentTest);
   updateProgress();
   const finalPercent = questions.length === 0 ? 0 : (correctQuestions / questions.length) * 100;
   const passed = finalPercent >= 75;
@@ -344,6 +457,8 @@ function finish() {
   el('restartMixed').onclick = () => startTest(currentTest, true);
   showOnly('end');
 }
+
+updateMenuProgress();
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
