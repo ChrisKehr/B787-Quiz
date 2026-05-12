@@ -1,0 +1,4 @@
+Korrigierte Antworten anhand geprüfter Excel-Datei
+
+Test 3, Frage 26: A -> C | war: No, this must be done manually | jetzt: Yes, the change is always automatic
+Test 3, Frage 76: B -> C | war: 51 Celsius | jetzt: 49 Celsius
